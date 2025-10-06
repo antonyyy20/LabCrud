@@ -35,12 +35,23 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         // Debug: verificar que los datos lleguen correctamente
         \Log::info('Datos recibidos:', $request->all());
         
-        Product::create($request->validated());
+        // Validación manual
+        $request->validate([
+            'description' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+        ]);
+        
+        Product::create([
+            'description' => $request->description,
+            'price' => $request->price,
+            'stock' => $request->stock,
+        ]);
 
         return Redirect::route('products.index')
             ->with('success', 'Product created successfully.');
