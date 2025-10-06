@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $product->name ?? __('Show') . " " . __('Product') }}
+    {{ $product->description ?? __('Show') . " " . __('Product') }}
 @endsection
 
 @section('content')
@@ -19,8 +19,24 @@
                     </div>
 
                     <div class="card-body bg-white">
-                        
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>{{ __('Description') }}:</strong>
+                                {{ $product->description }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>{{ __('Price') }}:</strong>
+                                ${{ number_format($product->price, 2) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>{{ __('Stock') }}:</strong>
+                                {{ $product->stock }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
