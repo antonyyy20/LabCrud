@@ -37,6 +37,9 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request): RedirectResponse
     {
+        // Debug: verificar que los datos lleguen correctamente
+        \Log::info('Datos recibidos:', $request->all());
+        
         Product::create($request->validated());
 
         return Redirect::route('products.index')
